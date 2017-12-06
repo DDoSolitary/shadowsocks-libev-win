@@ -1,4 +1,5 @@
 . /etc/profile
+set -e
 cd /cygdrive/c/projects/shadowsocks-libev-win
 git config --global core.autocrlf false
 git clone https://github.com/shadowsocks/shadowsocks-libev
