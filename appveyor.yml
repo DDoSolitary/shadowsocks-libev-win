@@ -1,0 +1,7 @@
+﻿image: Visual Studio 2017
+install:
+  - ps: C:\cygwin\setup-x86.exe -qn -R C:\cygwin -s http://cygwin.mirror.constant.com -l C:\cygwin\var\cache\setup -P libpcre-devel libcares-devel libev-devel libsodium-devel mbedtls-devel
+build_script:
+  - ps: C:\cygwin\bin\bash.exe build.sh
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
