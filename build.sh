@@ -1,6 +1,9 @@
+. /etc/profile
+cd /cygdrive/c/projects/shadowsocks-libev-win
+git config --global core.autocrlf false
 git clone https://github.com/shadowsocks/shadowsocks-libev
 cd shadowsocks-libev
-git submodule --init
+git submodule update --init
 ./autogen.sh
 ./configure --disable-documentation
 make
