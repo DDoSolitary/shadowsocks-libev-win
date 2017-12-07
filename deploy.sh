@@ -9,7 +9,10 @@ git config --global user.email DDoSolitary@gmail.com
 git clone git@github.com:DDoSolitary/shadowsocks-libev-win -b $release_branch
 cd shadowsocks-libev-win
 rm -f *.exe *.dll
-cp /cygdrive/c/projects/shadowsocks-libev-win/shadowsocks-libev/output/* .
+cp ../shadowsocks-libev/output/* .
 git add -A
-git commit -m "release"
+git commit \
+	-m "Nightly build on $(date +%F) of v$(./ss-local -h | awk 'NR == 2 { print $2 }')." \
+	-m "shadowsocks/shadowsocks-libev@$(git --git-dir=../shadowsocks-libev/.git show -s --format=%H)" \
+	|| exit 0
 git push
