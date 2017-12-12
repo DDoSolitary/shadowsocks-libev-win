@@ -10,7 +10,7 @@ environment:
       cygwin_setup: setup-x86_64.exe
       release_branch: release-x86_64
 install:
-  - ps: iex "$env:cygwin_path/$env:cygwin_setup -qn -R $env:cygwin_path -s http://cygwin.mirror.constant.com -l $env:cygwin_path/var/cache/setup -P libpcre-devel -P libcares-devel -P libev-devel -P libsodium-devel -P mbedtls-devel"
+  - ps: start -Wait $env:cygwin_path/$env:cygwin_setup "-qng -R $env:cygwin_path -s http://cygwin.mirror.constant.com -l $env:cygwin_path/var/cache/setup -P libpcre-devel -P libcares-devel -P libev-devel -P libsodium-devel -P mbedtls-devel"
 build_script:
   - ps: iex "$env:cygwin_path/bin/bash.exe build.sh"
 deploy_script:
