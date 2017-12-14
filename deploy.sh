@@ -16,3 +16,5 @@ git commit \
 	-m "shadowsocks/shadowsocks-libev@$(git --git-dir=../shadowsocks-libev/.git show -s --format=%H)" \
 	|| exit 0
 git push
+cd ..
+rm -rf shadowsocks-libev shadowsocks-libev-win .ssh .gitconfig
