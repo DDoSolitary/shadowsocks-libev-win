@@ -12,9 +12,16 @@ cache:
   - C:\cygwin-build
 install:
   - ps: |
-      if (Test-Path $env:cygwin_db/installed.db) { cp $env:cygwin_db/installed.db $env:cygwin_db/old.db }
+      if (Test-Path $env:cygwin_db/installed.db) {
+          cp $env:cygwin_db/installed.db $env:cygwin_db/old.db
+      } else {
+          echo "No existing Cygwin install detected."
+      }
       start -Wait $env:cygwin_setup "-qng -R C:/cygwin-build -s http://cygwin.mirror.constant.com -P git -P openssh -P gcc-core -P make -P automake -P autoconf -P libtool -P libpcre-devel -P libcares-devel -P libev-devel -P libsodium-devel -P mbedtls-devel"
-      if ((Test-Path $env:cygwin_db/old.db) -and !(compare (cat $env:cygwin_db/installed.db) (cat $env:cygwin_db/old.db))) { $env:APPVEYOR_CACHE_SKIP_SAVE = true }
+      if ((Test-Path $env:cygwin_db/old.db) -and !(compare (cat $env:cygwin_db/installed.db) (cat $env:cygwin_db/old.db))) {
+          $env:APPVEYOR_CACHE_SKIP_SAVE = "true"
+          echo "Cygwin already up-to-date, cache update skipped."
+      }
 build_script:
   - ps: |
       iex "C:/cygwin-build/bin/bash.exe build.sh"
