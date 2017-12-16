@@ -17,4 +17,4 @@ git commit \
 	|| exit 0
 git push
 cd ..
-rm -rf shadowsocks-libev shadowsocks-libev-win .ssh .gitconfig
+rm -rf shadowsocks-libev shadowsocks-libev-win .ssh .gitconfig /etc/setup/old.db
