@@ -17,7 +17,7 @@ git clone git@github.com:DDoSolitary/shadowsocks-libev-win -b $release_branch
 
 mkdir -p stat
 touch stat/installed.db stat/commit
-git_commit="$(git --git-dir=shadowsocks-libev-win/.git show -s --format=%H)"
+git_commit="$(git --git-dir=shadowsocks-libev/.git show -s --format=%H)"
 if diff /etc/setup/installed.db stat/installed.db && [ "$(cat stat/commit)" == "$git_commit" ]; then
 	exit 0
 fi
