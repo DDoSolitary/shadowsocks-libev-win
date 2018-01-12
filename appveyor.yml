@@ -19,6 +19,5 @@ build_script:
           iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
       }
   - ps: |
-      iex "C:/cygwin-build/bin/sh -l -c rebaseall"
       iex "C:/cygwin-build/bin/bash.exe build.sh"
       $host.SetShouldExit($LastExitCode)
