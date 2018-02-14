@@ -40,7 +40,7 @@ function build {
 mkdir dst
 build shadowsocks-libev
 build simple-obfs
-cp /bin/sh.exe dst
+cp /bin/sh.exe dst/usr/local/bin
 
 cd shadowsocks-libev-win
 rm -f *.exe *.dll
