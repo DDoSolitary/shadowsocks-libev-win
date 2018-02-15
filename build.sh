@@ -83,6 +83,7 @@ diff --git a/src/plugin.c b/src/plugin.c
 -
      return err;
  }
+
 EOF
 popd
 
