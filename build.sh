@@ -35,15 +35,16 @@ git clone https://github.com/shadowsocks/simple-obfs
 git clone git@github.com:DDoSolitary/shadowsocks-libev-win -b $release_branch
 
 mkdir -p stat
-touch stat/installed.db stat/ss-commit stat/obfs-commit
+touch stat/installed.db stat/ss-commit stat/obfs-commit stat/script-commit
 ss_commit="$(get-commit shadowsocks-libev)"
 obfs_commit="$(get-commit simple-obfs)"
-if diff /etc/setup/installed.db stat/installed.db && [ "$(cat stat/ss-commit)" == "$ss_commit" ] && [ "$(cat stat/obfs-commit)" == "$obfs_commit" ]; then
+if diff /etc/setup/installed.db stat/installed.db && [ "$(cat stat/ss-commit)" == "$ss_commit" ] && [ "$(cat stat/obfs-commit)" == "$obfs_commit" ] && [ "$(cat stat/script-commit)" == "$APPVEYOR_REPO_COMMIT" ]; then
 	exit 0
 fi
 cp /etc/setup/installed.db stat/
 echo "$ss_commit" > stat/ss-commit
 echo "$obfs_commit" > stat/obfs-commit
+echo "$APPVEYOR_REPO_COMMIT" > stat/script-commit
 
 pushd shadowsocks-libev
 git apply << EOF
