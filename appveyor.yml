@@ -18,4 +18,4 @@ build_script:
           $blockRdp = $true;
           iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
       }
-  - C:/cygwin-build/bin/bash.exe build.sh 2>&1
+  - C:/cygwin-build/bin/bash.exe build.sh
