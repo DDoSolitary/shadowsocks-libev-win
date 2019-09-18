@@ -1,6 +1,6 @@
 # shadowsocks-libev-win
 
-[![Build status](https://ci.appveyor.com/api/projects/status/gpco6r9np23y35ag?svg=true)](https://ci.appveyor.com/project/DDoSolitary/shadowsocks-libev-win)
+![Build status](https://github.com/DDoSolitary/shadowsocks-libev-win/workflows/.github/workflows/build.yml/badge.svg)
 
 Windows builds for shadowsocks-libev.
 
@@ -8,5 +8,5 @@ Windows builds for shadowsocks-libev.
 
 Building starts at 00:00 UTC every day and files here will be automatically updated if there are any changes.
 
-- [x86](https://github.com/DDoSolitary/shadowsocks-libev-win/archive/release-x86.zip)
-- [x86_64](https://github.com/DDoSolitary/shadowsocks-libev-win/archive/release-x86_64.zip)
+- [x86](https://dl.bintray.com/ddosolitary/dev-releases/:shadowsocks-libev-win-x86.tar.gz)
+- [x86_64](https://dl.bintray.com/ddosolitary/dev-releases/:shadowsocks-libev-win-x86_64.tar.gz)
