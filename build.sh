@@ -24,7 +24,7 @@ git clone https://github.com/shadowsocks/shadowsocks-libev
 git clone https://github.com/shadowsocks/simple-obfs
 
 pushd simple-obfs
-patch -Np1 << EOF
+git apply << EOF
 diff --git a/src/utils.c b/src/utils.c
 index 67cc250..514a001 100644
 --- a/src/utils.c
