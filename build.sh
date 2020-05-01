@@ -9,7 +9,7 @@ cd shadowsocks-libev
 git submodule update --init
 
 cd build
-cmake .. -DWITH_STATIC=OFF -DWITH_SS_REDIR=OFF
+cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_STATIC=OFF -DWITH_SS_REDIR=OFF
 make
 
 mkdir dst
