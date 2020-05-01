@@ -2,41 +2,16 @@
 
 set -e
 
-function build {
-	pushd $1
-	git submodule update --init
-	./autogen.sh
-	./configure --disable-documentation
-	make
-	make DESTDIR="$HOME/dst" install
-	popd
-}
-
 git clone https://github.com/shadowsocks/shadowsocks-libev
-git clone https://github.com/shadowsocks/simple-obfs
+cd shadowsocks-libev
+git submodule update --init
 
-pushd simple-obfs
-git apply << EOF
-diff --git a/src/utils.c b/src/utils.c
-index 67cc250..514a001 100644
---- a/src/utils.c
-+++ b/src/utils.c
-@@ -92,7 +92,7 @@ int
- ss_isnumeric(const char *s) {
-     if (!s || !*s)
-         return 0;
--    while (isdigit(*s))
-+    while (isdigit((int)*s))
-         ++s;
-     return *s == '\0';
- }
-EOF
-popd
+./autogen.sh
+./configure --disable-documentation
+make
 
 mkdir dst
-build shadowsocks-libev
-build simple-obfs
-
+make DESTDIR=dst install
 cd dst/usr/local/bin
 cp $(ldd *.exe | awk '$3 ~ /\/usr\/bin\// { print $3 }' | sort | uniq) .
 tar czf binaries.tar.gz *
