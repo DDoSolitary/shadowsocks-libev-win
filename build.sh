@@ -2,10 +2,7 @@
 
 set -e
 
-echo $PATH
-which cmake
-which gcc
-exit 1
+export PATH=/usr/bin
 
 git clone https://github.com/shadowsocks/shadowsocks-libev
 cd shadowsocks-libev
