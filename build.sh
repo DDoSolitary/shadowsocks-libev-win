@@ -13,8 +13,8 @@ cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_STATIC=OFF -DWITH_SS_REDIR=OFF
 make
 
 mkdir dst
-make DESTDIR=dst install
-cd dst/usr/local/bin
+cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/* dst
+cd dst
 cp $(ldd *.exe *.dll | awk '$3 ~ /\/usr\/bin\// { print $3 }' | sort | uniq) .
 tar czf binaries.tar.gz *
 
