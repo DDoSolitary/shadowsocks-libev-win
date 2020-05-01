@@ -12,14 +12,6 @@ function build {
 	popd
 }
 
-function get-version {
-	$1 -h | awk 'NR == 2 { printf $2 }'
-}
-
-function get-commit {
-	git --git-dir="$1/.git" show -s --format=%H
-}
-
 git clone https://github.com/shadowsocks/shadowsocks-libev
 git clone https://github.com/shadowsocks/simple-obfs
 
