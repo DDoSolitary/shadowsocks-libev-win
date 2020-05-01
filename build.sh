@@ -2,6 +2,11 @@
 
 set -e
 
+echo $PATH
+which cmake
+which gcc
+exit 1
+
 git clone https://github.com/shadowsocks/shadowsocks-libev
 cd shadowsocks-libev
 git submodule update --init
