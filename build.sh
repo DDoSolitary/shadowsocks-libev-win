@@ -46,7 +46,7 @@ make
 mkdir dst
 cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/*.dll ../src/shadowsocks.h  dst
 if [[ "$TOOLCHAIN" == 'mingw' ]]; then
-	cp lib/libshadowsocks-libev.a dst
+	find lib -type f ! -name '*.dll.a' -exec cp '{}' dst \;
 fi
 cd dst
 if [[ "$TOOLCHAIN" == 'cygwin' ]]; then
