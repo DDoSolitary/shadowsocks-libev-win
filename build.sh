@@ -51,10 +51,12 @@ fi
 cd dst
 if [[ "$TOOLCHAIN" == 'cygwin' ]]; then
 	bin_prefix='\/usr\/bin\/'
+	deps="$(ldd *.exe *.dll)"
 elif [[ "$TOOLCHAIN" == 'mingw' ]]; then
 	bin_prefix='\'"$MINGW_PREFIX"'\/bin\/'
+	deps="$(for i in *.exe *.dll; do ntldd $i; done | sed 's|\\|/|g')"
 fi
-cp $(ldd *.exe *.dll | awk '$3 ~ /'"$bin_prefix"'/ { print $3 }' | sort | uniq) .
+cp $(echo "$deps" | awk '$3 ~ /'"$bin_prefix"'/ { print $3 }' | sort | uniq) .
 tar czf binaries.tar.gz *
 
 curl="curl -sSL -u ddosolitary:$BINTRAY_KEY"

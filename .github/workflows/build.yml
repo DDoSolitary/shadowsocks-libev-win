@@ -43,5 +43,5 @@ jobs:
           7z x -oC:\ "$Env:TEMP\$($msys2_filename).tar"
           $ErrorActionPreference = 'Continue'
           C:\msys64\usr\bin\bash.exe -l -c 'pacman -Syu --noconfirm --noprogressbar'
-          C:\msys64\usr\bin\bash.exe -l -c 'pacman -Syu --needed --noconfirm --noprogressbar base-devel git $MINGW_PACKAGE_PREFIX-{toolchain,cmake,pcre,c-ares,libsodium,mbedtls}'
+          C:\msys64\usr\bin\bash.exe -l -c 'pacman -Syu --needed --noconfirm --noprogressbar base-devel git $MINGW_PACKAGE_PREFIX-{toolchain,cmake,pcre,c-ares,libsodium,mbedtls,ntldd}'
           C:\msys64\usr\bin\bash.exe -le (Join-Path (Get-Location) build.sh)
