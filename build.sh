@@ -62,6 +62,6 @@ tar czf binaries.tar.gz *
 curl="curl -sSL -u ddosolitary:$BINTRAY_KEY"
 api_prefix=https://api.bintray.com/content/ddosolitary/dev-releases
 file_name=shadowsocks-libev-$TOOLCHAIN-$ARCH.tar.gz
-$curl -X DELETE $api_prefix/$file_name
-$curl -f -T binaries.tar.gz $api_prefix/default/default/$file_name
+$curl -X DELETE $api_prefix/shadowsocks-libev-win/$file_name
+$curl -f -T binaries.tar.gz $api_prefix/default/default/shadowsocks-libev-win/$file_name
 $curl -f -X POST $api_prefix/default/default/publish
