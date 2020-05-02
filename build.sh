@@ -13,7 +13,7 @@ cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_STATIC=OFF -DWITH_SS_REDIR=OFF
 make
 
 mkdir dst
-cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/* dst
+cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/* ../src/shadowsocks.h  dst
 cd dst
 cp $(ldd *.exe *.dll | awk '$3 ~ /\/usr\/bin\// { print $3 }' | sort | uniq) .
 tar czf binaries.tar.gz *
