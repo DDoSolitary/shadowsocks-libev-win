@@ -25,7 +25,7 @@ eval cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo $cmake_args
 make
 
 mkdir dst
-cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/*.dll ../src/shadowsocks.h  dst
+cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/*.dll ../src/shadowsocks.h ../LICENSE dst
 cd dst
 if [[ "$TOOLCHAIN" == 'cygwin' ]]; then
 	bin_prefix='\/usr\/bin\/'
