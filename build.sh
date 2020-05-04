@@ -26,9 +26,6 @@ make
 
 mkdir dst
 cp shared/bin/* lib/libshadowsocks-libev.dll.a  bin/*.dll ../src/shadowsocks.h  dst
-if [[ "$TOOLCHAIN" == 'mingw' ]]; then
-	find lib -type f ! -name '*.dll.a' -exec cp '{}' dst \;
-fi
 cd dst
 if [[ "$TOOLCHAIN" == 'cygwin' ]]; then
 	bin_prefix='\/usr\/bin\/'
@@ -37,7 +34,21 @@ elif [[ "$TOOLCHAIN" == 'mingw' ]]; then
 	bin_prefix='\'"$MINGW_PREFIX"'\/bin\/'
 	deps="$(for i in *.exe *.dll; do ntldd $i; done | sed 's|\\|/|g')"
 fi
-cp $(echo "$deps" | awk '$3 ~ /'"$bin_prefix"'/ { print $3 }' | sort | uniq) .
+deps="$(echo "$deps" | awk '$3 ~ /'"$bin_prefix"'/ { print $3 }' | sort | uniq)"
+cp $deps .
+if [[ "$TOOLCHAIN" == 'mingw' ]]; then
+	script='CREATE libshadowsocks-libev.a'
+	for i in $(echo "$deps" | sed -E 's/(-|\.).*/.a/;s|/bin/|/lib/|'); do
+		if [[ -f "$i" ]]; then
+			script="$(printf "$script\nADDLIB $i")"
+	       	fi
+	done
+	for i in $(find ../lib -type f ! -name '*.dll.a'); do
+		script="$(printf "$script\nADDLIB $i")"
+	done
+	script="$(printf "$script\nSAVE\nEND")"
+	echo "$script" | ar -M
+fi
 tar czf binaries.tar.gz *
 
 curl="curl -sSL -u ddosolitary:$BINTRAY_KEY"
