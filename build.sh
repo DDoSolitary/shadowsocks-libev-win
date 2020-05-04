@@ -7,7 +7,7 @@ if [[ "$TOOLCHAIN" == 'mingw' ]]; then
 	cd libev
 	./autogen.sh
 	./configure
-	make
+	make LDFLAGS='-no-undefined -lws2_32'
 	make install
 	cd ..
 fi
