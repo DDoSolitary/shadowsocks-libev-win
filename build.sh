@@ -3,32 +3,13 @@ if [[ "$TOOLCHAIN" == 'cygwin' ]]; then
 fi
 
 if [[ "$TOOLCHAIN" == 'mingw' ]]; then
-	git clone https://github.com/xorangekiller/libev-git
-	cd libev-git
-	patch -Np1 << EOF
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 299e5cf..07c4dff 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -196,6 +196,10 @@ if(BUILD_SHARED_LIBS)
-         target_link_libraries(ev ${LIBRT_NAME} ${LIBM_NAME})
-     endif()
- 
-+    if (MINGW)
-+        target_link_libraries(ev ws2_32)
-+    endif()
-+
-     create_libtool_file(ev_static /lib)
- 
-     install(TARGETS ev LIBRARY DESTINATION lib)
-EOF
-
-	mkdir build
-	cd build
-	cmake .. -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=RelWithDbgInfo -DCMAKE_INSTALL_PREFIX=$MINGW_PREFIX
+	git clone https://github.com/shadowsocks/libev -b mingw
+	cd libev
+	./autogen.sh
+	./configure
 	make
 	make install
-	cd ../..
+	cd ..
 fi
 
 git clone https://github.com/shadowsocks/shadowsocks-libev
