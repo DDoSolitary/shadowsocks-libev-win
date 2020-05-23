@@ -37,10 +37,6 @@ jobs:
         env:
           MSYSTEM: ${{ matrix.msystem }}
         run: |
-          $msys2_filename = 'msys2-base-x86_64-20190524'
-          Invoke-WebRequest -Uri "http://repo.msys2.org/distrib/x86_64/$($msys2_filename).tar.xz" -OutFile "$Env:TEMP\$($msys2_filename).tar.xz"
-          7z x -o"$Env:TEMP" "$Env:TEMP\$($msys2_filename).tar.xz"
-          7z x -oC:\ "$Env:TEMP\$($msys2_filename).tar"
           $ErrorActionPreference = 'Continue'
           C:\msys64\usr\bin\bash.exe -l -c 'pacman -Syu --noconfirm --noprogressbar'
           C:\msys64\usr\bin\bash.exe -l -c 'pacman -Syu --needed --noconfirm --noprogressbar base-devel git $MINGW_PACKAGE_PREFIX-{toolchain,cmake,pcre,c-ares,libsodium,mbedtls,ntldd}'
