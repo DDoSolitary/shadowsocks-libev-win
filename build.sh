@@ -50,9 +50,6 @@ if [[ "$TOOLCHAIN" == 'mingw' ]]; then
 	echo "$script" | ar -M
 fi
 
-# Removing libraries due to a commercial contract.
-rm *.h *.a *shadowsocks-libev.dll
-
 tar czf binaries.tar.gz *
 
 curl="curl -sSL -u ddosolitary:$BINTRAY_KEY"
