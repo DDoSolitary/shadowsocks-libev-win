@@ -8,4 +8,4 @@ Windows builds for shadowsocks-libev.
 
 Building starts at 00:00 UTC every day and files here will be automatically updated if there are any changes.
 
-[Download Link](https://dl.bintray.com/ddosolitary/dev-releases/shadowsocks-libev-win/)
+[Download Link](https://ddosolitary-builds.sourceforge.io/shadowsocks-libev-win/)

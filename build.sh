@@ -53,11 +53,11 @@ fi
 tar czf binaries.tar.gz *
 
 if [ "$GITHUB_REF" = refs/heads/master ]; then
-	curl -fsSL -T binaries.tar.gz \
-		-u ddosolitary:$BINTRAY_KEY \
-		-H 'X-Bintray-Package: default' \
-		-H 'X-Bintray-Version: default' \
-		-H 'X-Bintray-Publish: 1' \
-		-H 'X-Bintray-Override: 1' \
-		https://api.bintray.com/content/ddosolitary/dev-releases/shadowsocks-libev-win/shadowsocks-libev-$TOOLCHAIN-$ARCH.tar.gz
+	mkdir -p ~/.ssh
+	echo $DEPLOYKEY | base64 -d > ~/.ssh/id_ed25519
+	chmod 600 ~/.ssh/id_ed25519
+	ssh-keyscan web.sourceforge.net > ~/.ssh/known_hosts
+	scp \
+		binaries.tar.gz \
+		ddosolitary@web.sourceforge.net:/home/project-web/ddosolitary-builds/htdocs/shadowsocks-libev-win/shadowsocks-libev-$TOOLCHAIN-$ARCH.tar.gz
 fi

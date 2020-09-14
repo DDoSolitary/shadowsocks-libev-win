@@ -20,7 +20,7 @@ jobs:
             msystem: MINGW64
     runs-on: windows-2019
     env:
-      BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
+      DEPLOYKEY: ${{ secrets.DEPLOYKEY }}
       ARCH: ${{ matrix.arch }}
       TOOLCHAIN: ${{ matrix.toolchain }}
     steps:
