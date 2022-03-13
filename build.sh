@@ -20,6 +20,8 @@ if [[ "$TOOLCHAIN" == 'cygwin' ]]; then
 	cmake_args='-DWITH_STATIC=OFF -DWITH_SS_REDIR=OFF'
 elif [[ "$TOOLCHAIN" == 'mingw' ]]; then
 	cmake_args='-G "MSYS Makefiles" -DWITH_DOC_MAN=OFF -DWITH_DOC_HTML=OFF'
+	curl -fsSLO https://github.com/shadowsocks/shadowsocks-libev/pull/2880.patch
+	patch -d .. -Np1 -i "$PWD"/2880.patch
 fi
 eval cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo $cmake_args
 make
@@ -41,7 +43,7 @@ if [[ "$TOOLCHAIN" == 'mingw' ]]; then
 	for i in $(echo "$deps" | sed -E 's/(-|\.).*/.a/;s|/bin/|/lib/|'); do
 		if [[ -f "$i" ]]; then
 			script="$(printf "$script\nADDLIB $i")"
-	       	fi
+		fi
 	done
 	for i in $(find ../lib -type f ! -name '*.dll.a'); do
 		script="$(printf "$script\nADDLIB $i")"
